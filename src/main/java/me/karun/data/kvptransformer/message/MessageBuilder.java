@@ -11,9 +11,6 @@ import static me.karun.data.kvptransformer.utils.Collectors.asStack;
 public class MessageBuilder {
 
   private final List<Pair<String, Object>> data;
-  private final Function<String, List<String>> splitKeys = key -> Arrays.asList(key.split("\\."));
-  private final Function<List<String>, List<String>> reverseList = Lists::reverse;
-  private final Function<List<String>, Stack<String>> toStack = l -> l.stream().collect(asStack());
 
   public MessageBuilder() {
     this.data = new ArrayList<>();
@@ -29,7 +26,12 @@ public class MessageBuilder {
   }
 
   public Message build() {
+    final Function<String, List<String>> splitKeys = key -> Arrays.asList(key.split("\\."));
+    final Function<List<String>, List<String>> reverseList = Lists::reverse;
+    final Function<List<String>, Stack<String>> toStack = l -> l.stream().collect(asStack());
+
     final Map<String, Object> dataTree = new HashMap<>();
+
     data.stream()
       .map(pair -> new Pair<>(
         splitKeys.andThen(reverseList).andThen(toStack).apply(pair.getKey()),
