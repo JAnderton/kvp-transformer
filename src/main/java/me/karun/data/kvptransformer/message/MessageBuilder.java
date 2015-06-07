@@ -5,6 +5,7 @@ import javafx.util.Pair;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static me.karun.data.kvptransformer.utils.Collectors.asStack;
 
@@ -37,6 +38,7 @@ public class MessageBuilder {
         splitKeys.andThen(reverseList).andThen(toStack).apply(pair.getKey()),
         pair.getValue()))
       .forEach(p -> insertInMap(dataTree, p.getKey(), p.getValue()));
+    // TODO: Move away from insertInMap. Move to using Collectors.
 
     return new Message(dataTree);
   }
