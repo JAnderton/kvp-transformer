@@ -9,6 +9,16 @@ import static org.junit.Assert.*;
 public class MessageBuilderTest {
 
   @Test
+  public void shouldInsertDataCorrectly() {
+    final String key = "key";
+    final String value = "value";
+    final Message message = message().insert(key, value).build();
+
+    assertTrue(message.getValue(key).isPresent());
+    assertThat(message.getValue(key).get(), is(value));
+  }
+
+  @Test
   public void shouldInsertValueInMessage() {
     final String key = "key";
     final String value = "value";

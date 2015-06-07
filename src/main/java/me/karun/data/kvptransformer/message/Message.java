@@ -1,10 +1,9 @@
 package me.karun.data.kvptransformer.message;
 
 import com.google.gson.Gson;
-import javafx.util.Pair;
 
-import java.util.*;
-import java.util.function.Function;
+import java.util.Map;
+import java.util.Optional;
 
 public class Message {
   private final Map<String, Object> dataTree;
@@ -23,19 +22,5 @@ public class Message {
 
   public String toJson() {
     return new Gson().toJson(dataTree);
-  }
-}
-
-class MessageKey {
-  private MessageBuilder builder;
-  private final String key;
-
-  public MessageKey(MessageBuilder builder, final String key) {
-    this.builder = builder;
-    this.key = key;
-  }
-
-  public MessageBuilder andValue(final Object value) {
-    return builder.insert(key, value);
   }
 }

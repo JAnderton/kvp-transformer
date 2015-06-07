@@ -5,7 +5,6 @@ import javafx.util.Pair;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static me.karun.data.kvptransformer.utils.Collectors.asStack;
 
