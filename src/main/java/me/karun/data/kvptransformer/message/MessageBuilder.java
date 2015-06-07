@@ -56,7 +56,10 @@ public class MessageBuilder {
     }
 
     if (o instanceof Map) {
-      return insertInMap((Map<String, Object>) o, keyStack, value);
+      @SuppressWarnings("unchecked")
+      final Map<String, Object> treeSubset = (Map<String, Object>) o;
+
+      return insertInMap(treeSubset, keyStack, value);
     }
 
     throw new RuntimeException("Leaf exists at specified location");
