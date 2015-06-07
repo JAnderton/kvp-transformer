@@ -1,31 +1,36 @@
 package me.karun.data.kvptransformer.message;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
+
+import java.util.Optional;
 
 import static me.karun.data.kvptransformer.message.Message.message;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 public class MessageBuilderTest {
 
   @Test
   public void shouldInsertDataCorrectly() {
     final String key = "key";
-    final String value = "value";
-    final Message message = message().insert(key, value).build();
+    final String expectedValue = "value";
+    final Message message = message().insert(key, expectedValue).build();
 
-    assertTrue(message.getValue(key).isPresent());
-    assertThat(message.getValue(key).get(), is(value));
+    final Optional<Object> actualValue = message.getValue(key);
+    assertTrue(actualValue.isPresent());
+    assertEquals(actualValue.get(), expectedValue);
   }
 
   @Test
   public void shouldInsertValueInMessage() {
     final String key = "key";
-    final String value = "value";
-    final Message message = message().withKey(key).andValue(value).build();
+    final String expectedValue = "value";
+    final Message message = message().withKey(key).andValue(expectedValue).build();
 
-    assertTrue(message.getValue(key).isPresent());
-    assertThat(message.getValue(key).get(), is(value));
+    final Optional<Object> actualValue = message.getValue(key);
+    assertTrue(actualValue.isPresent());
+    assertEquals(actualValue.get(), expectedValue);
   }
 
   @Test
@@ -56,7 +61,7 @@ public class MessageBuilderTest {
       fail("Expected RuntimeException: " + expectedErrorMessage);
     } catch (Throwable t) {
       assertTrue(t instanceof RuntimeException);
-      assertThat(t.getMessage(), is(expectedErrorMessage));
+      assertEquals(t.getMessage(), expectedErrorMessage);
     }
   }
 }

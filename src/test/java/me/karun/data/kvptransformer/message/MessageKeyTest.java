@@ -1,10 +1,10 @@
 package me.karun.data.kvptransformer.message;
 
-import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import org.testng.annotations.Test;
+
 import static org.mockito.Mockito.*;
+import static org.testng.Assert.assertEquals;
 
 public class MessageKeyTest {
 
@@ -18,7 +18,7 @@ public class MessageKeyTest {
 
     final MessageBuilder outputMessageBuilder = messageKey.andValue(value);
 
-    assertThat(outputMessageBuilder, is(inputMessageBuilder));
+    assertEquals(outputMessageBuilder, inputMessageBuilder);
     verify(inputMessageBuilder).insert(key, value);
   }
 }

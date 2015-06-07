@@ -1,10 +1,10 @@
 package me.karun.data.kvptransformer.message;
 
-import org.junit.Test;
+
+import org.testng.annotations.Test;
 
 import static me.karun.data.kvptransformer.message.Message.message;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class MessageTest {
 
@@ -13,7 +13,7 @@ public class MessageTest {
     final String expectedResult = "{\"key\":\"value\"}";
     final Message message = message().withKey("key").andValue("value").build();
 
-    assertThat(message.toJson(), is(expectedResult));
+    assertEquals(message.toJson(), expectedResult);
   }
 
   @Test
@@ -24,6 +24,6 @@ public class MessageTest {
       .withKey("application.version").andValue(1)
       .build();
 
-    assertThat(message.toJson(), is(expectedResult));
+    assertEquals(message.toJson(), expectedResult);
   }
 }
