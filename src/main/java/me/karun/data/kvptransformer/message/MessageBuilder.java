@@ -4,22 +4,16 @@ import com.google.common.collect.Lists;
 import javafx.util.Pair;
 
 import java.util.*;
-import java.util.function.BinaryOperator;
 import java.util.function.Function;
-import java.util.stream.Collector;
+
+import static me.karun.data.kvptransformer.utils.Collectors.asStack;
 
 public class MessageBuilder {
 
   private final List<Pair<String, Object>> data;
   private final Function<String, List<String>> splitKeys = key -> Arrays.asList(key.split("\\."));
   private final Function<List<String>, List<String>> reverseList = Lists::reverse;
-  private final BinaryOperator<Stack<String>> stackCombiner = (s1, s2) -> {
-    final Stack<String> freshStack = new Stack<>();
-    s1.forEach(freshStack::push);
-    s2.forEach(freshStack::push);
-    return freshStack;
-  };
-  private final Function<List<String>, Stack<String>> toStack = l -> l.stream().collect(Collector.of(Stack::new, Stack::push, stackCombiner));
+  private final Function<List<String>, Stack<String>> toStack = l -> l.stream().collect(asStack());
 
   public MessageBuilder() {
     this.data = new ArrayList<>();
