@@ -1,13 +1,11 @@
-package me.karun.data.kvptransformer.message;
+package me.karun.data.kvptransformer.entities.message;
 
 import org.testng.annotations.Test;
 
 import java.util.Optional;
 
-import static me.karun.data.kvptransformer.message.Message.message;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
+import static me.karun.data.kvptransformer.entities.message.Message.message;
+import static org.testng.Assert.*;
 
 public class MessageBuilderTest {
 

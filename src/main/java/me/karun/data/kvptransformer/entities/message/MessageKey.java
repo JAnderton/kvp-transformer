@@ -1,4 +1,4 @@
-package me.karun.data.kvptransformer.message;
+package me.karun.data.kvptransformer.entities.message;
 
 public class MessageKey {
   private final MessageBuilder builder;

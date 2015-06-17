@@ -1,4 +1,4 @@
-package me.karun.data.kvptransformer.message;
+package me.karun.data.kvptransformer.entities.message;
 
 import com.google.common.collect.Lists;
 import javafx.util.Pair;
@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 import static me.karun.data.kvptransformer.utils.Collectors.asStack;
 
-public class MessageBuilder {
+public class MessageBuilder implements Builder<Message> {
 
   private final List<Pair<String, Object>> data;
 
@@ -25,6 +25,7 @@ public class MessageBuilder {
     return this;
   }
 
+  @Override
   public Message build() {
     final Function<String, List<String>> splitKeys = key -> Arrays.asList(key.split("\\."));
     final Function<List<String>, List<String>> reverseList = Lists::reverse;
