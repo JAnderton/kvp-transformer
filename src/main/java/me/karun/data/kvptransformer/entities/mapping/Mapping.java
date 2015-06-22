@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
+// FIXME: Domain model incorrectly encapsulated
 public class Mapping {
 
   private final Map<String, String> mappings;
@@ -22,6 +23,7 @@ public class Mapping {
     return new MappingSource(new Mapping());
   }
 
+  // FIXME: Avoid mutation based builders
   public MappingSource addMapping(final String source, final String target) {
     mappings.put(source, target);
     return new MappingSource(this);
