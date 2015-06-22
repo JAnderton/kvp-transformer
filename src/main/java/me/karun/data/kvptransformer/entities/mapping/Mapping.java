@@ -11,7 +11,7 @@ import java.util.function.Function;
 public class Mapping {
 
   private final Map<String, String> mappings;
-  private final Map<String, Function> transforms;
+  private final Map<String, Function<Object, Object>> transforms;
 
   @VisibleForTesting
   protected Mapping() {
@@ -29,8 +29,9 @@ public class Mapping {
     return new MappingSource(this);
   }
 
+  @SuppressWarnings("unchecked")
   public <T, U> MappingSource addTransform(String source, Function<T, U> transform) {
-    transforms.put(source, transform);
+    transforms.put(source, (Function<Object, Object>) transform);
     return new MappingSource(this);
   }
 
@@ -38,7 +39,7 @@ public class Mapping {
     return Optional.ofNullable(mappings.get(key));
   }
 
-  public Optional<Function> getTransform(final String key) {
+  public Optional<Function<Object, Object>> getTransform(final String key) {
     return Optional.ofNullable(transforms.get(key));
   }
 }

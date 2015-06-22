@@ -19,7 +19,7 @@ public class MappingTargetTest {
   };
 
   private final BiConsumer<Mapping, Pair<String, Function>> assertOnTransform = (m, p) -> {
-    final Optional<Function> transform = m.getTransform(p.getKey());
+    final Optional<Function<Object, Object>> transform = m.getTransform(p.getKey());
     assertTrue(transform.isPresent());
     assertEquals(transform.get(), p.getValue());
   };
