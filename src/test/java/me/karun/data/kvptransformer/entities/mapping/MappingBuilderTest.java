@@ -52,7 +52,7 @@ public class MappingBuilderTest {
   }
 
   @Test
-  public void shouldBuildSingleTransformation() {
+  public void shouldBuildSingleMappingAndTransformation() {
     final Mapping expectedMapping = new Mapping();
     final String source = "source";
     final String target = "target";
@@ -66,7 +66,7 @@ public class MappingBuilderTest {
   }
 
   @Test
-  public void shouldBuildMultipleTransformation() {
+  public void shouldBuildMultipleMappingAndTransformation() {
     final Mapping expectedMapping = new Mapping();
     final String source1 = "source1";
     final String target1 = "target1";
