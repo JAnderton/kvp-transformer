@@ -29,6 +29,7 @@ public class MappingBuilderTest {
     final Mapping expectedMapping = new Mapping();
     final String source = "source";
     final String target = "target";
+
     final Mapping actualMapping = new MappingBuilder(expectedMapping, source, target).build();
 
     assertEquals(actualMapping, expectedMapping);
@@ -42,6 +43,7 @@ public class MappingBuilderTest {
     final String target1 = "target1";
     final String source2 = "source2";
     final String target2 = "target2";
+
     final Mapping actualMapping = new MappingBuilder(expectedMapping, source1, target1).and()
       .source(source2).toTarget(target2)
       .build();
@@ -57,6 +59,7 @@ public class MappingBuilderTest {
     final String source = "source";
     final String target = "target";
     final Function<String, Integer> transform = Integer::parseInt;
+
     final Mapping actualMapping = new MappingBuilder(expectedMapping, source, target).withTransform(transform)
       .build();
 
@@ -74,6 +77,7 @@ public class MappingBuilderTest {
     final String target2 = "target2";
     final Function<String, Integer> transform1 = Integer::parseInt;
     final Function<Integer, String> transform2 = String::valueOf;
+
     final Mapping actualMapping = new MappingBuilder(expectedMapping, source1, target1).withTransform(transform1).and()
       .source(source2).toTarget(target2).withTransform(transform2)
       .build();
