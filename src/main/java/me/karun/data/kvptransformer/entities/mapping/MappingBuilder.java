@@ -17,7 +17,7 @@ public class MappingBuilder implements Builder<Mapping>, FluentJoiner<MappingSou
     this.target = target;
   }
 
-  public <T, U> FluentJoiner<MappingSource> withTransform(final Function<T, U> transform) {
+  public <T, U> MappingBuilder withTransform(final Function<T, U> transform) {
     mapping.addTransform(source, transform);
 
     return this;

@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -15,6 +16,12 @@ public class MappingBuilderTest {
     final Optional<String> mappedValue = m.getMapping(p.getKey());
     assertTrue(mappedValue.isPresent());
     assertEquals(mappedValue.get(), p.getValue());
+  };
+
+  private final BiConsumer<Mapping, Pair<String, Function>> assertOnTransform = (m, p) -> {
+    final Optional<Function> transform = m.getTransform(p.getKey());
+    assertTrue(transform.isPresent());
+    assertEquals(transform.get(), p.getValue());
   };
 
   @Test
@@ -42,5 +49,20 @@ public class MappingBuilderTest {
     assertEquals(actualMapping, expectedMapping);
     assertOnMapping.accept(actualMapping, new Pair<>(source1, target1));
     assertOnMapping.accept(actualMapping, new Pair<>(source2, target2));
+  }
+
+  @Test
+  public void shouldBuildSingleTransformation() {
+    final Mapping expectedMapping = new Mapping();
+    final String source = "source";
+    final String target = "target";
+    final Function<String, Integer> transform = Integer::parseInt;
+    final Mapping actualMapping = new MappingBuilder(expectedMapping, source, target)
+      .withTransform(transform)
+      .build();
+
+    assertEquals(actualMapping, expectedMapping);
+    assertOnMapping.accept(actualMapping, new Pair<>(source, target));
+    assertOnTransform.accept(actualMapping, new Pair<>(source, transform));
   }
 }
