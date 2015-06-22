@@ -1,4 +1,4 @@
-package me.karun.data.kvptransformer.entities.engine;
+package me.karun.data.kvptransformer.phases.transform;
 
 import javafx.util.Pair;
 import me.karun.data.kvptransformer.entities.mapping.Mapping;
@@ -9,15 +9,15 @@ import java.util.Optional;
 
 import static me.karun.data.kvptransformer.entities.message.Message.message;
 
-public class Engine {
+public class TransformationEngine {
 
   private final Optional<Mapping> mapping;
 
-  public Engine() {
+  public TransformationEngine() {
     this.mapping = Optional.empty();
   }
 
-  public Engine(final Mapping mapping) {
+  public TransformationEngine(final Mapping mapping) {
     this.mapping = Optional.ofNullable(mapping);
   }
 

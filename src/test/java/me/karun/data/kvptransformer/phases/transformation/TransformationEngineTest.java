@@ -1,4 +1,4 @@
-package me.karun.data.kvptransformer.entities.engine;
+package me.karun.data.kvptransformer.phases.transformation;
 
 import me.karun.data.kvptransformer.entities.mapping.Mapping;
 import me.karun.data.kvptransformer.entities.message.Message;
@@ -13,7 +13,7 @@ import static me.karun.data.kvptransformer.entities.message.Message.message;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class EngineTest {
+public class TransformationEngineTest {
 
   private String mappingSource;
   private int expectedValue;
@@ -38,9 +38,9 @@ public class EngineTest {
   @Test
   public void shouldProcessMessageWithNoMapping() {
     final Message input = message().build();
-    final Engine engine = new Engine();
+    final TransformationEngine transformationEngine = new TransformationEngine();
 
-    final Message output = engine.process(input);
+    final Message output = transformationEngine.process(input);
 
     assertEquals(output, input);
   }
@@ -50,9 +50,9 @@ public class EngineTest {
     final Mapping mapping = map()
       .source(mappingSource).toTarget(mappingTarget)
       .build();
-    final Engine engine = new Engine(mapping);
+    final TransformationEngine transformationEngine = new TransformationEngine(mapping);
 
-    final Message output = engine.process(input);
+    final Message output = transformationEngine.process(input);
 
     final Optional<Object> actualValue = output.getValue(mappingTarget);
     assertTrue(actualValue.isPresent());
@@ -64,9 +64,9 @@ public class EngineTest {
     final Mapping mapping = map()
       .source(mappingSource).toTarget(mappingTarget).withTransform(transform)
       .build();
-    final Engine engine = new Engine(mapping);
+    final TransformationEngine transformationEngine = new TransformationEngine(mapping);
 
-    final Message output = engine.process(input);
+    final Message output = transformationEngine.process(input);
 
     final Optional<Object> actualValue = output.getValue(mappingTarget);
     assertTrue(actualValue.isPresent());
@@ -79,9 +79,9 @@ public class EngineTest {
       .source(mappingSource).toTarget(mappingTarget).withTransform(transform).and()
       .source("randomText").toTarget("somethingElse").withTransform(o -> "Value: " + o.toString())
       .build();
-    final Engine engine = new Engine(mapping);
+    final TransformationEngine transformationEngine = new TransformationEngine(mapping);
 
-    final Message output = engine.process(input);
+    final Message output = transformationEngine.process(input);
 
     final Optional<Object> value = output.getValue(mappingTarget);
     assertTrue(value.isPresent());
