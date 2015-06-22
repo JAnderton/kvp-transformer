@@ -25,15 +25,12 @@ public class MappingBuilder implements Builder<Mapping>, FluentJoiner<MappingSou
 
   @Override
   public Mapping build() {
-    final Map<String, String> mappings = new HashMap<>();
-    mappings.put(source, target);
-
     mapping.addMapping(source, target);
     return mapping;
   }
 
   @Override
   public MappingSource and() {
-    return new MappingSource(mapping);
+    return mapping.addMapping(source, target);
   }
 }

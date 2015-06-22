@@ -2,10 +2,9 @@ package me.karun.data.kvptransformer.entities.message;
 
 import com.google.gson.Gson;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Message {
@@ -20,7 +19,19 @@ public class Message {
   }
 
   public Optional<Object> getValue(final String key) {
-    return Optional.ofNullable(dataTree.get(key));
+    final Function<String, List<String>> splitKeys = k -> Arrays.asList(k.split("\\."));
+    final BiFunction<String, Map<String, Object>, Object> iterateTree = (k, source) -> source.get(k);
+
+    Map<String, Object> treeHead = dataTree;
+    for (final String k : splitKeys.apply(key)) {
+      final Object node = iterateTree.apply(k, treeHead);
+      if (!(node instanceof Map)) {
+        return Optional.ofNullable(node);
+      }
+      treeHead = (Map<String, Object>) node;
+    }
+
+    return Optional.empty();
   }
 
   public String toJson() {
@@ -39,7 +50,7 @@ public class Message {
 
     tree.keySet().stream()
       .filter(k -> tree.get(k) instanceof Map)
-      .map(k -> fetchQualifiedKeys((Map<String, Object>)tree.get(k), k))
+      .map(k -> fetchQualifiedKeys((Map<String, Object>) tree.get(k), k))
       .forEach(keys::addAll);
 
     return keys;

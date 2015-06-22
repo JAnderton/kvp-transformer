@@ -1,5 +1,7 @@
 package me.karun.data.kvptransformer.entities.mapping;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -10,7 +12,8 @@ public class Mapping {
   private final Map<String, String> mappings;
   private final Map<String, Function> transforms;
 
-  private Mapping() {
+  @VisibleForTesting
+  protected Mapping() {
     this.mappings = new HashMap<>();
     this.transforms = new HashMap<>();
   }
