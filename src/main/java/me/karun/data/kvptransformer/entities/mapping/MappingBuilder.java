@@ -1,12 +1,10 @@
 package me.karun.data.kvptransformer.entities.mapping;
 
-import me.karun.data.kvptransformer.entities.message.Builder;
+import me.karun.data.kvptransformer.entities.creation.JoinerAndBuilder;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
 
-public class MappingBuilder implements Builder<Mapping>, FluentJoiner<MappingSource> {
+public class MappingBuilder implements JoinerAndBuilder<MappingSource, Mapping> {
   private final Mapping mapping;
   private final String source;
   private final String target;
@@ -17,7 +15,7 @@ public class MappingBuilder implements Builder<Mapping>, FluentJoiner<MappingSou
     this.target = target;
   }
 
-  public <T, U> MappingBuilder withTransform(final Function<T, U> transform) {
+  public <T, U> JoinerAndBuilder<MappingSource, Mapping> withTransform(final Function<T, U> transform) {
     mapping.addTransform(source, transform);
 
     return this;

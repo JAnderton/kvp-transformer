@@ -1,5 +1,7 @@
 package me.karun.data.kvptransformer.entities.mapping;
 
+import me.karun.data.kvptransformer.entities.creation.JoinerAndBuilder;
+
 import java.util.function.Function;
 
 public class MappingTarget {
@@ -15,7 +17,7 @@ public class MappingTarget {
     return new MappingBuilder(mapping, source, target);
   }
 
-  public <I, O> MappingBuilder withTransform(Function<I, O> transform) {
+  public <I, O> JoinerAndBuilder<MappingSource, Mapping> withTransform(Function<I, O> transform) {
     return new MappingBuilder(mapping, source, source).withTransform(transform);
   }
 }
