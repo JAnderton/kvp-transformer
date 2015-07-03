@@ -1,6 +1,9 @@
 package me.karun.data.kvptransformer.entities.message;
 
 import com.google.gson.Gson;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -56,23 +59,18 @@ public class Message {
     return keys;
   }
 
-  public Map<String, Object> toMap() {
-    return deepCopyMap(dataTree);
+  @Override
+  public boolean equals(Object o) {
+    return EqualsBuilder.reflectionEquals(this, o);
   }
 
-  private Map<String, Object> deepCopyMap(final Map<String, Object> baseMap) {
-    final Map<String, Object> treeCopy = new HashMap<>();
+  @Override
+  public int hashCode() {
+    return HashCodeBuilder.reflectionHashCode(97, 31, this);
+  }
 
-    baseMap.forEach((k, v) -> {
-      if (!(v instanceof Map)) {
-        treeCopy.put(k, v);
-      } else {
-        @SuppressWarnings("unchecked")
-        final Map<String, Object> subMap = (Map<String, Object>) v;
-
-        treeCopy.put(k, deepCopyMap(subMap));
-      }
-    });
-    return treeCopy;
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this);
   }
 }

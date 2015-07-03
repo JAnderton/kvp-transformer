@@ -17,6 +17,10 @@ public class MessageBuilder implements Builder<Message> {
     this.data = new ArrayList<>();
   }
 
+  public MessageBuilder(final List<Pair<String, Object>> data) {
+    this.data = data;
+  }
+
   public MessageKey withKey(final String key) {
     return new MessageKey(this, key);
   }
@@ -42,6 +46,10 @@ public class MessageBuilder implements Builder<Message> {
     // TODO: Move away from insertInMap. Move to using Collectors.
 
     return new Message(dataTree);
+  }
+
+  public List<Pair<String, Object>> getData() {
+    return data;
   }
 
   private MessageBuilder insertInMap(final Map<String, Object> treeSubset, final Stack<String> keyStack, final Object value) {
