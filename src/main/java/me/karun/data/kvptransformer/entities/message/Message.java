@@ -42,18 +42,21 @@ public class Message {
   }
 
   public Set<String> getQualifiedKeys() {
-    return fetchQualifiedKeys(dataTree, "");
+    return fetchQualifiedKeys(dataTree, Optional.empty());
   }
 
-  private Set<String> fetchQualifiedKeys(final Map<String, Object> tree, final String parentKey) {
+  private Set<String> fetchQualifiedKeys(final Map<String, Object> tree, final Optional<String> parentKey) {
     final Set<String> keys = tree.keySet().stream()
       .filter(k -> !(tree.get(k) instanceof Map))
-      .map(s -> parentKey + "." + s)
+      .map(s -> Arrays.<Optional<String>>asList(parentKey, Optional.of(s.toString())).stream()
+        .filter(Optional::isPresent)
+        .map(Optional::get)
+        .collect(Collectors.joining(".")))
       .collect(Collectors.toSet());
 
     tree.keySet().stream()
       .filter(k -> tree.get(k) instanceof Map)
-      .map(k -> fetchQualifiedKeys((Map<String, Object>) tree.get(k), k))
+      .map(k -> fetchQualifiedKeys((Map<String, Object>) tree.get(k), Optional.of(k)))
       .forEach(keys::addAll);
 
     return keys;

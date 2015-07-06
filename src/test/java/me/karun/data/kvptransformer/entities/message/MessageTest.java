@@ -48,4 +48,19 @@ public class MessageTest {
 
     assertEquals(message.getQualifiedKeys(), expectedResult);
   }
+
+
+  @Test
+  public void shouldProvideFullyQualifiedKeysForNonNestedMessages() {
+    final Set<String> expectedResult = new HashSet<>(Arrays.asList(
+      "application",
+      "test"
+    ));
+    final Message message = message()
+      .withKey("application").andValue("kvp-transformer")
+      .withKey("test").andValue("val123")
+      .build();
+
+    assertEquals(message.getQualifiedKeys(), expectedResult);
+  }
 }
