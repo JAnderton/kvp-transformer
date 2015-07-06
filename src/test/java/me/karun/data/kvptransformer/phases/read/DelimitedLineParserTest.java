@@ -25,7 +25,10 @@ public class DelimitedLineParserTest {
     assertEquals(actualResult, expectedResult);
   }
 
-  @Test(expectedExceptions = {IndexOutOfBoundsException.class})
+  @Test(
+    expectedExceptions = {IndexOutOfBoundsException.class},
+    expectedExceptionsMessageRegExp = "Index: 1, Size: 1"
+  )
   public void shouldThrowErrorWhenDelimiterIsNotFound() {
     final List<String> incorrectLines = Arrays.asList("key1=value1", "key2value2");
 
