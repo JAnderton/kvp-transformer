@@ -12,15 +12,13 @@ import static me.karun.data.kvptransformer.utils.Accumulators.pairToMessageBuild
 import static me.karun.data.kvptransformer.utils.Combiners.messageBuilderCombiner;
 
 public class DelimitedLineParser {
-  private final List<String> lines;
   private final String delimiter;
 
-  DelimitedLineParser(List<String> lines, String delimiter) {
-    this.lines = lines;
+  public DelimitedLineParser(final String delimiter) {
     this.delimiter = delimiter;
   }
 
-  public Message parse() {
+  public Message parse(final List<String> lines) {
     return lines.stream()
       .map(s -> Arrays.asList(s.split(delimiter)))
       .map(l -> l.stream().map(String::trim).collect(Collectors.toList()))

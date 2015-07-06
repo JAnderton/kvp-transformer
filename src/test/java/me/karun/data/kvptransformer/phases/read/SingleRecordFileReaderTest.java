@@ -1,21 +1,21 @@
 package me.karun.data.kvptransformer.phases.read;
 
-import me.karun.data.kvptransformer.entities.message.Message;
 import org.testng.annotations.Test;
 
-import static me.karun.data.kvptransformer.entities.message.Message.message;
-import static org.testng.Assert.*;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
 
 public class SingleRecordFileReaderTest {
 
   @Test
   public void shouldReadFilesCorrectly() throws Exception {
-    final Message expectedMessage = message()
-      .withKey("key1").andValue("value1")
-      .withKey("key2").andValue("2")
-      .build();
-    final Message actualMessage = new SingleRecordFileReader("src/test/resources/single-record").read(); // FIXME should be paths relative to resources
+    final String fileName = "src/test/resources/single-record"; // FIXME should be paths relative to resources
+    final List<String> expectedLines = Arrays.asList("key1=value1","key2=2");
 
-    assertEquals(actualMessage, expectedMessage);
+    final List<String> actualLines = new SingleRecordFileReader(fileName).read();
+
+    assertEquals(actualLines, expectedLines);
   }
 }
