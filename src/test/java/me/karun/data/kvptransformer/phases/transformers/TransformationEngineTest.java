@@ -1,4 +1,4 @@
-package me.karun.data.kvptransformer.phases.transform;
+package me.karun.data.kvptransformer.phases.transformers;
 
 import me.karun.data.kvptransformer.entities.mapping.Mapping;
 import me.karun.data.kvptransformer.entities.message.Message;

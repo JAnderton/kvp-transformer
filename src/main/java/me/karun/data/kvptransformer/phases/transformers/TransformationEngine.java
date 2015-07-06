@@ -1,4 +1,4 @@
-package me.karun.data.kvptransformer.phases.transform;
+package me.karun.data.kvptransformer.phases.transformers;
 
 import javafx.util.Pair;
 import me.karun.data.kvptransformer.entities.mapping.Mapping;

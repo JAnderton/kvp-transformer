@@ -1,4 +1,4 @@
-package me.karun.data.kvptransformer.phases.read;
+package me.karun.data.kvptransformer.phases.parsers;
 
 import javafx.util.Pair;
 import me.karun.data.kvptransformer.entities.message.Message;

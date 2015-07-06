@@ -1,4 +1,4 @@
-package me.karun.data.kvptransformer.phases.publish;
+package me.karun.data.kvptransformer.phases.publishers;
 
 import me.karun.data.kvptransformer.entities.message.Message;
 import org.testng.annotations.Test;

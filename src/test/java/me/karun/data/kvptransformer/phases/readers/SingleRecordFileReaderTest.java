@@ -1,4 +1,4 @@
-package me.karun.data.kvptransformer.phases.read;
+package me.karun.data.kvptransformer.phases.readers;
 
 import org.testng.annotations.Test;
 
