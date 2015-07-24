@@ -4,15 +4,15 @@ import me.karun.data.kvptransformer.entities.message.Message;
 
 import java.io.PrintStream;
 
-public class ConsolePublisher {
+public class PrintStreamPublisher {
 
   private final PrintStream stream;
 
-  public ConsolePublisher() {
+  public PrintStreamPublisher() {
     this(System.out);
   }
 
-  public ConsolePublisher(final PrintStream stream) {
+  public PrintStreamPublisher(final PrintStream stream) {
     this.stream = stream;
   }
 

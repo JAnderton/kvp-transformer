@@ -9,13 +9,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ConsolePublisherTest {
+public class PrintStreamPublisherTest {
 
   @Test
   public void testPublish() throws Exception {
     final Message message = mock(Message.class);
     final PrintStream stream = mock(PrintStream.class);
-    final ConsolePublisher publisher = new ConsolePublisher(stream);
+    final PrintStreamPublisher publisher = new PrintStreamPublisher(stream);
 
     when(message.toString()).thenReturn("{key1=1,key2=2}");
     publisher.publish(message);

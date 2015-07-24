@@ -2,7 +2,7 @@ package me.karun.data.kvptransformer.process;
 
 import me.karun.data.kvptransformer.entities.message.Message;
 import me.karun.data.kvptransformer.phases.parsers.DelimitedLineParser;
-import me.karun.data.kvptransformer.phases.publishers.ConsolePublisher;
+import me.karun.data.kvptransformer.phases.publishers.PrintStreamPublisher;
 import me.karun.data.kvptransformer.phases.readers.SingleRecordFileReader;
 import me.karun.data.kvptransformer.phases.transformers.TransformationEngine;
 import org.testng.annotations.Test;
@@ -35,7 +35,7 @@ public class ChainTest {
     when(parser.parse(lines)).thenReturn(input);
     final TransformationEngine engine = mock(TransformationEngine.class);
     when(engine.process(input)).thenReturn(output);
-    final ConsolePublisher publisher = mock(ConsolePublisher.class);
+    final PrintStreamPublisher publisher = mock(PrintStreamPublisher.class);
 
     new Chain(reader, parser, engine, publisher).execute();
 
