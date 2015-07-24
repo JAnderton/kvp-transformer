@@ -14,7 +14,7 @@ public class SingleRecordFileReaderTest {
 
   @Test
   public void shouldReadFilesCorrectly() throws IOException, URISyntaxException {
-    final String fileName = "src/test/resources/single-record"; // FIXME should be paths relative to resources
+    final String fileName = "src/test/resources/single-record-per-file"; // FIXME should be paths relative to resources
     final List<String> expectedLines = Arrays.asList("key1=value1","key2=2");
 
     final List<String> actualLines = new SingleRecordFileReader(fileName).read();
