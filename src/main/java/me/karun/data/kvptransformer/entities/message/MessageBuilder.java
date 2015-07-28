@@ -1,8 +1,9 @@
 package me.karun.data.kvptransformer.entities.message;
 
 import com.google.common.collect.Lists;
-import javafx.util.Pair;
 import me.karun.data.kvptransformer.entities.creation.Builder;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.function.Function;
@@ -26,7 +27,7 @@ public class MessageBuilder implements Builder<Message> {
   }
 
   public MessageBuilder insert(final String key, final Object value) {
-    data.add(new Pair<>(key, value));
+    data.add(new ImmutablePair<>(key, value));
     return this;
   }
 
@@ -39,7 +40,7 @@ public class MessageBuilder implements Builder<Message> {
     final Map<String, Object> dataTree = new HashMap<>();
 
     data.stream()
-      .map(pair -> new Pair<>(
+      .map(pair -> new ImmutablePair<>(
         splitKeys.andThen(reverseList).andThen(toStack).apply(pair.getKey()),
         pair.getValue()))
       .forEach(p -> insertInMap(dataTree, p.getKey(), p.getValue()));

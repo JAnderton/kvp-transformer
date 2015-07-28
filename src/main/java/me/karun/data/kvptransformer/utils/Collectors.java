@@ -1,8 +1,8 @@
 package me.karun.data.kvptransformer.utils;
 
 import com.google.common.collect.ImmutableList;
-import javafx.util.Pair;
 import me.karun.data.kvptransformer.entities.message.MessageBuilder;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -24,7 +24,6 @@ public class Collectors {
   }
 
   public static Collector<Pair<String, Object>, MessageBuilder, MessageBuilder> asMessage() {
-    // TODO: Migrate from JavaFx pair to Apache Tuples
     final Supplier<MessageBuilder> supplier = MessageBuilder::new;
     final BiConsumer<MessageBuilder, Pair<String, Object>> accumulator = (b, p) -> b.insert(p.getKey(), p.getValue());
     final BinaryOperator<MessageBuilder> combiner = (b1, b2) -> new MessageBuilder(

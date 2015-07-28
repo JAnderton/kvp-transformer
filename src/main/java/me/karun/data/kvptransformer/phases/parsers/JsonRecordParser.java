@@ -5,8 +5,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.internal.LazilyParsedNumber;
-import javafx.util.Pair;
 import me.karun.data.kvptransformer.entities.message.Message;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.List;
 import java.util.function.Function;
@@ -39,7 +39,7 @@ public class JsonRecordParser {
 
   private final Function<JsonObject, Message> jsonToMessage = jObject -> jObject.entrySet().stream()
     .map(e ->
-      new Pair<>(e.getKey(), elementToObject.apply(e.getValue())))
+      new ImmutablePair<>(e.getKey(), elementToObject.apply(e.getValue())))
     .collect(me.karun.data.kvptransformer.utils.Collectors.asMessage())
     .build();
 
