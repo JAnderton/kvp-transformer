@@ -1,6 +1,11 @@
 package me.karun.data.kvptransformer.utils;
 
-import java.util.Stack;
+import com.google.common.collect.ImmutableList;
+import javafx.util.Pair;
+import me.karun.data.kvptransformer.entities.message.MessageBuilder;
+
+import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
@@ -16,5 +21,19 @@ public class Collectors {
     };
 
     return Collector.of(stackSupplier, Stack::push, stackCombiner);
+  }
+
+  public static Collector<Pair<String, Object>, MessageBuilder, MessageBuilder> asMessage() {
+    // TODO: Migrate from JavaFx pair to Apache Tuples
+    final Supplier<MessageBuilder> supplier = MessageBuilder::new;
+    final BiConsumer<MessageBuilder, Pair<String, Object>> accumulator = (b, p) -> b.insert(p.getKey(), p.getValue());
+    final BinaryOperator<MessageBuilder> combiner = (b1, b2) -> new MessageBuilder(
+      new ImmutableList.Builder<Pair<String, Object>>()
+        .addAll(b1.getData())
+        .addAll(b2.getData())
+        .build()
+    );
+
+    return Collector.of(supplier, accumulator, combiner);
   }
 }
