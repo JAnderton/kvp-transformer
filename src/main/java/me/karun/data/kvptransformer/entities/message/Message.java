@@ -48,7 +48,7 @@ public class Message {
   private Set<String> fetchQualifiedKeys(final Map<String, Object> tree, final Optional<String> parentKey) {
     final Set<String> keys = tree.keySet().stream()
       .filter(k -> !(tree.get(k) instanceof Map))
-      .map(s -> Arrays.<Optional<String>>asList(parentKey, Optional.of(s.toString())).stream()
+      .map(s -> Arrays.<Optional<String>>asList(parentKey, Optional.of(s)).stream()
         .filter(Optional::isPresent)
         .map(Optional::get)
         .collect(Collectors.joining(".")))
